@@ -73,8 +73,6 @@ object SchoolMeal {
                 "fri",
                 "sat"
             )
-            var i = 0
-            var previous = -1
             lists.forEach mthDiet@{
                 day.forEach dayF@{ d ->
                     val monthStr = when (d) {
@@ -110,8 +108,6 @@ object SchoolMeal {
                         monthStr,
                         year, month
                     )
-                    previous = dateStr
-                    i++
                     result.getOrPut(edu) {
                         mutableMapOf()
                     }[school.code]!!.getOrPut(year) { mutableMapOf() }
