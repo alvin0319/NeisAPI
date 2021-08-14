@@ -24,20 +24,10 @@
 package me.alvin0319.neisapi.util.search
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class DataBody(
-    @get:JsonProperty("result")
-    @set:JsonProperty("result")
-    @JsonProperty("method")
-    var result: Result?,
-    @get:JsonProperty("action_title")
-    @set:JsonProperty("action_title")
-    @JsonProperty("action_title")
-    var action_title: String?,
-    @get:JsonProperty("resultSVO")
-    @set:JsonProperty("resultSVO")
-    @JsonProperty("resultSVO")
-    var resultSVO: ResultSVO?
+    val result: Result?,
+    val action_title: String?,
+    val resultSVO: ResultSVO?
 )

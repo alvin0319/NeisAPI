@@ -26,24 +26,12 @@ package me.alvin0319.neisapi.util.meal
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.annotation.JsonPropertyOrder
-import javax.annotation.Generated
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder("result", "action_title", "resultSVO")
-@Generated("jsonschema2pojo")
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class SchoolMealSearchResult(
-    @get:JsonProperty("result")
-    @set:JsonProperty("result")
-    @JsonProperty("result")
-    var result: Result? = null,
-    @get:JsonProperty("action_title")
-    @set:JsonProperty("action_title")
+    val result: Result?,
     @JsonProperty("action_title")
-    var actionTitle: String? = null,
-    @get:JsonProperty("resultSVO")
-    @set:JsonProperty("resultSVO")
-    @JsonProperty("resultSVO")
-    var resultSVO: ResultSVO? = null,
+    val actionTitle: String?,
+    val resultSVO: ResultSVO?,
 )

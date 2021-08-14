@@ -25,144 +25,34 @@ package me.alvin0319.neisapi.util.meal
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.annotation.JsonPropertyOrder
-import javax.annotation.Generated
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder(
-    "flag",
-    "svcId",
-    "voId",
-    "method",
-    "userId",
-    "ip",
-    "resultCode",
-    "resultMsg",
-    "comData",
-    "dept",
-    "lang",
-    "useSession",
-    "commitYn",
-    "testExeSeq",
-    "globCorpCd",
-    "schYm",
-    "schYmd",
-    "schMmealScCode",
-    "schSchulCode",
-    "schulCode",
-    "schulKndScCode",
-    "schulCrseScCode",
-    "insttNm",
-    "mthDietList",
-    "ay",
-    "mm"
-)
-@Generated("jsonschema2pojo")
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ResultSVO(
-    @get:JsonProperty("flag")
-    @set:JsonProperty("flag")
-    @JsonProperty("flag")
-    var flag: String? = null,
-    @get:JsonProperty("svcId")
-    @set:JsonProperty("svcId")
-    @JsonProperty("svcId")
-    var svcId: String? = null,
-    @get:JsonProperty("voId")
-    @set:JsonProperty("voId")
-    @JsonProperty("voId")
-    var voId: String? = null,
-    @get:JsonProperty("method")
-    @set:JsonProperty("method")
-    @JsonProperty("method")
-    var method: String? = null,
-    @get:JsonProperty("userId")
-    @set:JsonProperty("userId")
-    @JsonProperty("userId")
-    var userId: String? = null,
-    @get:JsonProperty("ip")
-    @set:JsonProperty("ip")
-    @JsonProperty("ip")
-    var ip: String? = null,
-    @get:JsonProperty("resultCode")
-    @set:JsonProperty("resultCode")
-    @JsonProperty("resultCode")
-    var resultCode: String? = null,
-    @get:JsonProperty("resultMsg")
-    @set:JsonProperty("resultMsg")
-    @JsonProperty("resultMsg")
-    var resultMsg: String? = null,
-    @get:JsonProperty("comData")
-    @set:JsonProperty("comData")
-    @JsonProperty("comData")
-    var comData: ComData? = null,
-    @get:JsonProperty("dept")
-    @set:JsonProperty("dept")
-    @JsonProperty("dept")
-    var dept: String? = null,
-    @get:JsonProperty("lang")
-    @set:JsonProperty("lang")
-    @JsonProperty("lang")
-    var lang: String? = null,
-    @get:JsonProperty("useSession")
-    @set:JsonProperty("useSession")
-    @JsonProperty("useSession")
-    var useSession: String? = null,
-    @get:JsonProperty("commitYn")
-    @set:JsonProperty("commitYn")
-    @JsonProperty("commitYn")
-    var commitYn: String? = null,
-    @get:JsonProperty("testExeSeq")
-    @set:JsonProperty("testExeSeq")
-    @JsonProperty("testExeSeq")
-    var testExeSeq: String? = null,
-    @get:JsonProperty("globCorpCd")
-    @set:JsonProperty("globCorpCd")
-    @JsonProperty("globCorpCd")
-    var globCorpCd: String? = null,
-    @get:JsonProperty("schYm")
-    @set:JsonProperty("schYm")
-    @JsonProperty("schYm")
-    var schYm: String? = null,
-    @get:JsonProperty("schYmd")
-    @set:JsonProperty("schYmd")
-    @JsonProperty("schYmd")
-    var schYmd: String? = null,
-    @get:JsonProperty("schMmealScCode")
-    @set:JsonProperty("schMmealScCode")
-    @JsonProperty("schMmealScCode")
-    var schMmealScCode: String? = null,
-    @get:JsonProperty("schSchulCode")
-    @set:JsonProperty("schSchulCode")
-    @JsonProperty("schSchulCode")
-    var schSchulCode: String? = null,
-    @get:JsonProperty("schulCode")
-    @set:JsonProperty("schulCode")
-    @JsonProperty("schulCode")
-    var schulCode: String? = null,
-    @get:JsonProperty("schulKndScCode")
-    @set:JsonProperty("schulKndScCode")
-    @JsonProperty("schulKndScCode")
-    var schulKndScCode: String? = null,
-    @get:JsonProperty("schulCrseScCode")
-    @set:JsonProperty("schulCrseScCode")
-    @JsonProperty("schulCrseScCode")
-    var schulCrseScCode: String? = null,
-    @get:JsonProperty("insttNm")
-    @set:JsonProperty("insttNm")
-    @JsonProperty("insttNm")
-    var insttNm: String? = null,
-    @get:JsonProperty("mthDietList")
-    @set:JsonProperty("mthDietList")
-    @JsonProperty("mthDietList")
-    var mthDietList: List<MthDiet>? = null,
-    @get:JsonProperty("ay")
-    @set:JsonProperty("ay")
-    @JsonProperty("ay")
-    var ay: String? = null,
-    @get:JsonProperty("mm")
-    @set:JsonProperty("mm")
-    @JsonProperty("mm")
-    var mm: String? = null,
+    val flag: String?,
+    val svcId: String?,
+    val voId: String?,
+    val method: String?,
+    val userId: String?,
+    val ip: String?,
+    val resultCode: String?,
+    val resultMsg: String?,
+    val comData: ComData?,
+    val dept: String?,
+    val lang: String?,
+    val useSession: String?,
+    val commitYn: String?,
+    val testExeSeq: String?,
+    val globCorpCd: String?,
+    val schYm: String?,
+    val schYmd: String?,
+    val schMmealScCode: String?,
+    val schSchulCode: String?,
+    val schulCode: String?,
+    val schulKndScCode: String?,
+    val schulCrseScCode: String?,
+    val insttNm: String?,
+    val mthDietList: List<MthDiet>?,
+    val ay: String?,
+    val mm: String?,
 )

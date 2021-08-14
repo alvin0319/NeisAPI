@@ -28,19 +28,14 @@ import java.util.Date
 
 data class Meal @JvmOverloads constructor(
     // 날짜
-    var date: Date,
+    val date: Date,
     // 아침
-    var breakfast: String = "없음",
+    val breakfast: String = "없음",
     // 점심
-    var lunch: String = "없음",
+    val lunch: String = "없음",
     // 저녁
-    var dinner: String = "없음"
-) : Cloneable {
-
-    public override fun clone(): Meal {
-        return Meal(date, breakfast, lunch, dinner)
-    }
-
+    val dinner: String = "없음"
+) {
     fun removeAllergy(type: MealType): String {
         return NeisAPI.removeAllergy(
             when (type.name) {
@@ -65,7 +60,7 @@ data class Meal @JvmOverloads constructor(
             date.year = year - 1900
             date.date = charSplited.removeFirst().toInt()
 
-            var mealString: String
+            val mealString: String
             val mealList: List<String> = listOf("[조식]", "[중식]", "[석식]")
 
             val meals: MutableMap<String, MutableList<String>> = mutableMapOf()
@@ -79,7 +74,7 @@ data class Meal @JvmOverloads constructor(
             } else {
                 return Meal(date)
             }
-            var currentString: String
+            val currentString: String
             while (charSplited.isNotEmpty()) {
                 currentString = charSplited.removeFirst()
                 if (mealList.contains(currentString)) {

@@ -23,8 +23,9 @@
  */
 package me.alvin0319.neisapi.school
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import me.alvin0319.neisapi.request.Request
+import me.alvin0319.neisapi.request.Request.mapper
 import me.alvin0319.neisapi.types.SchoolDistrictList
 import me.alvin0319.neisapi.types.SchoolType
 import me.alvin0319.neisapi.util.search.DataBody
@@ -52,12 +53,8 @@ object SchoolSearch {
         if (response.statusLine.statusCode != 200) {
             return mutableListOf()
         }
-        val body = response.entity.content.readAllBytes().decodeToString()
 
-        val mapper = ObjectMapper()
-
-        val searchResult = mapper.readValue(body, DataBody::class.java)
-
+        val searchResult = mapper.readValue<DataBody>(response.entity.content)
         val searchedList: MutableList<SchoolSearched> = mutableListOf()
 
         if (searchResult.result?.status != "success") {

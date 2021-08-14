@@ -25,119 +25,29 @@ package me.alvin0319.neisapi.util.search
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.annotation.JsonPropertyOrder
-import javax.annotation.Generated
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder(
-    "flag",
-    "svcId",
-    "voId",
-    "method",
-    "userId",
-    "ip",
-    "resultCode",
-    "resultMsg",
-    "comData",
-    "dept",
-    "lang",
-    "useSession",
-    "commitYn",
-    "testExeSeq",
-    "globCorpCd",
-    "kraOrgNm",
-    "insttClsfCode",
-    "fondScCode",
-    "srCode",
-    "atptOfcdcScCode",
-    "orgDVOList"
-)
-@Generated("jsonschema2pojo")
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class ResultSVO constructor(
-    @get:JsonProperty("flag")
-    @set:JsonProperty("flag")
-    @JsonProperty("flag")
-    var flag: String? = null,
-    @get:JsonProperty("svcId")
-    @set:JsonProperty("svcId")
-    @JsonProperty("svcId")
-    var svcId: String? = null,
-    @get:JsonProperty("voId")
-    @set:JsonProperty("voId")
-    @JsonProperty("voId")
-    var voId: String? = null,
-    @get:JsonProperty("method")
-    @set:JsonProperty("method")
-    @JsonProperty("method")
-    var method: String? = null,
-    @get:JsonProperty("userId")
-    @set:JsonProperty("userId")
-    @JsonProperty("userId")
-    var userId: String? = null,
-    @get:JsonProperty("ip")
-    @set:JsonProperty("ip")
-    @JsonProperty("ip")
-    var ip: String? = null,
-    @get:JsonProperty("resultCode")
-    @set:JsonProperty("resultCode")
-    @JsonProperty("resultCode")
-    var resultCode: String? = null,
-    @get:JsonProperty("resultMsg")
-    @set:JsonProperty("resultMsg")
-    @JsonProperty("resultMsg")
-    var resultMsg: String? = null,
-    @get:JsonProperty("comData")
-    @set:JsonProperty("comData")
-    @JsonProperty("comData")
-    var comData: ComData? = null,
-    @get:JsonProperty("dept")
-    @set:JsonProperty("dept")
-    @JsonProperty("dept")
-    var dept: String? = null,
-    @get:JsonProperty("lang")
-    @set:JsonProperty("lang")
-    @JsonProperty("lang")
-    var lang: String? = null,
-    @get:JsonProperty("useSession")
-    @set:JsonProperty("useSession")
-    @JsonProperty("useSession")
-    var useSession: String? = null,
-    @get:JsonProperty("commitYn")
-    @set:JsonProperty("commitYn")
-    @JsonProperty("commitYn")
-    var commitYn: String? = null,
-    @get:JsonProperty("testExeSeq")
-    @set:JsonProperty("testExeSeq")
-    @JsonProperty("testExeSeq")
-    var testExeSeq: String? = null,
-    @get:JsonProperty("globCorpCd")
-    @set:JsonProperty("globCorpCd")
-    @JsonProperty("globCorpCd")
-    var globCorpCd: String? = null,
-    @get:JsonProperty("kraOrgNm")
-    @set:JsonProperty("kraOrgNm")
-    @JsonProperty("kraOrgNm")
-    var kraOrgNm: String? = null,
-    @get:JsonProperty("insttClsfCode")
-    @set:JsonProperty("insttClsfCode")
-    @JsonProperty("insttClsfCode")
-    var insttClsfCode: String? = null,
-    @get:JsonProperty("fondScCode")
-    @set:JsonProperty("fondScCode")
-    @JsonProperty("fondScCode")
-    var fondScCode: String? = null,
-    @get:JsonProperty("srCode")
-    @set:JsonProperty("srCode")
-    @JsonProperty("srCode")
-    var srCode: String? = null,
-    @get:JsonProperty("atptOfcdcScCode")
-    @set:JsonProperty("atptOfcdcScCode")
-    @JsonProperty("atptOfcdcScCode")
-    var atptOfcdcScCode: String? = null,
-    @get:JsonProperty("orgDVOList")
-    @set:JsonProperty("orgDVOList")
-    @JsonProperty("orgDVOList")
-    var orgDVOList: List<OrgDVO>? = null
+    val flag: String?,
+    val svcId: String?,
+    val voId: String?,
+    val method: String?,
+    val userId: String?,
+    val ip: String?,
+    val resultCode: String?,
+    val resultMsg: String?,
+    val comData: ComData?,
+    val dept: String?,
+    val lang: String?,
+    val useSession: String?,
+    val commitYn: String?,
+    val testExeSeq: String?,
+    val globCorpCd: String?,
+    val kraOrgNm: String?,
+    val insttClsfCode: String?,
+    val fondScCode: String?,
+    val srCode: String?,
+    val atptOfcdcScCode: String?,
+    val orgDVOList: List<OrgDVO>?
 )

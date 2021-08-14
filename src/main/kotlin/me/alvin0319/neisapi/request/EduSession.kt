@@ -28,7 +28,7 @@ import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.HttpClients
 import java.util.Date
 
-class EduSession(val eduCode: SchoolDistrictList) {
+class EduSession(private val eduCode: SchoolDistrictList) {
     var cookie: String = ""
         get() {
             if (time < Date().time || field == "") {
@@ -37,9 +37,9 @@ class EduSession(val eduCode: SchoolDistrictList) {
             return field
         }
 
-    var time: Long = -1
+    private var time: Long = -1
 
-    fun refreshCookie(): String {
+    private fun refreshCookie(): String {
         val client = HttpClients.createDefault()
         val request = HttpGet("https://stu.${eduCode.url}/edusys.jsp?page=sts_m40000")
         request.addHeader(

@@ -27,7 +27,7 @@ import me.alvin0319.neisapi.types.SchoolDistrictList
 
 object EduSessionManager {
 
-    val sessions: MutableMap<String, EduSession> = mutableMapOf()
+    private val sessions: MutableMap<String, EduSession> = mutableMapOf()
 
     fun getSession(eduCode: SchoolDistrictList): EduSession {
         return sessions.getOrPut(eduCode.name) { EduSession(eduCode) }

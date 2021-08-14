@@ -23,8 +23,9 @@
  */
 package me.alvin0319.neisapi.school
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import me.alvin0319.neisapi.request.Request
+import me.alvin0319.neisapi.request.Request.mapper
 import me.alvin0319.neisapi.school.meal.Meal
 import me.alvin0319.neisapi.types.SchoolDistrictList
 import me.alvin0319.neisapi.util.meal.SchoolMealSearchResult
@@ -34,7 +35,16 @@ internal typealias MonthInt = Int
 internal typealias DateInt = Int
 
 object SchoolMeal {
-    val result: MutableMap<SchoolDistrictList, MutableMap<String, MutableMap<YearInt, MutableMap<MonthInt, MutableMap<DateInt, Meal>>>>> =
+    private val day: List<String> = listOf(
+        "sun",
+        "mon",
+        "tue",
+        "wed",
+        "the",
+        "fri",
+        "sat"
+    )
+    private val result: MutableMap<SchoolDistrictList, MutableMap<String, MutableMap<YearInt, MutableMap<MonthInt, MutableMap<DateInt, Meal>>>>> =
         mutableMapOf()
 
     @JvmOverloads
@@ -45,7 +55,7 @@ object SchoolMeal {
             !refresh && result.getOrPut(edu) { mutableMapOf() }.getOrPut(school.code) { mutableMapOf() }
                 .getOrPut(year) { mutableMapOf() }.containsKey(month)
         ) {
-            return result[edu]!![school.code]!![year]!![month]!!
+            return result.getValue(edu).getValue(school.code).getValue(year).getValue(month)
         }
         val response = Request.createRequest(
             "sts_sci_md00_001.ws", edu,
@@ -57,22 +67,10 @@ object SchoolMeal {
             )
         )
 
-        val mealSearchResult = ObjectMapper().readValue(
-            response.entity.content.readAllBytes().decodeToString(),
-            SchoolMealSearchResult::class.java
+        val mealSearchResult = mapper.readValue<SchoolMealSearchResult>(
+            response.entity.content
         )
-        if (mealSearchResult?.resultSVO != null && mealSearchResult.resultSVO?.mthDietList != null) {
-            val lists = mealSearchResult.resultSVO!!.mthDietList!!
-            val date: MutableMap<Int, Meal> = mutableMapOf()
-            val day: List<String> = listOf(
-                "sun",
-                "mon",
-                "tue",
-                "wed",
-                "the",
-                "fri",
-                "sat"
-            )
+        mealSearchResult.resultSVO?.mthDietList?.let { lists ->
             lists.forEach mthDiet@{
                 day.forEach dayF@{ d ->
                     val monthStr = when (d) {
@@ -94,11 +92,11 @@ object SchoolMeal {
                         return@dayF
                     }
                     if (it.weekGb?.toInt() == 0 || it.weekGb?.toInt() == lists.size + 1) {
-                        if (it.weekGb?.toInt() == 0) {
+                        if (it.weekGb.toInt() == 0) {
                             if (dateStr > 7) {
                                 return@dayF
                             }
-                        } else if (it.weekGb?.toInt() == lists.size + 1) {
+                        } else if (it.weekGb.toInt() == lists.size + 1) {
                             if (dateStr < 10) {
                                 return@dayF
                             }
