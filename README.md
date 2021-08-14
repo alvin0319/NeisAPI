@@ -23,7 +23,7 @@ val schoolSearched = SchoolSearch.search(searchText, districtType)
 val year = 2021
 val month = 8
 // Map<Int, Meal> 반환
-val mealList = SchoolMeal.getMeal(year, month)
+val mealList = SchoolMeal.getMeal(schoolSearched, year, month)
 ```
 
 > 더 구체적인 예제는 [test](./src/test/kotlin/me/alvin0319/neisapi) 폴더에서 확인 가능합니다.
