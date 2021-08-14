@@ -10,7 +10,7 @@
 ##### 학교 검색
 ```kotlin
 
-val searchText = "..." // 검색할 고등학교 이름
+val searchText = "..." // 검색할 학교 이름
 
 val districtType = SchoolDistrictType.ALL // 검색할 교육청
 
