@@ -25,21 +25,10 @@ package me.alvin0319.neisapi.util.search
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.annotation.JsonPropertyOrder
-import javax.annotation.Generated
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder("status", "message")
-@Generated("jsonschema2pojo")
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Result constructor(
-    @get:JsonProperty("status")
-    @set:JsonProperty("status")
-    @JsonProperty("status")
-    var status: String? = null,
-    @get:JsonProperty("message")
-    @set:JsonProperty("message")
-    @JsonProperty("message")
-    var message: String? = null
+    val status: String?,
+    val message: String?
 )

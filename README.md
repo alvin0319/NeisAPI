@@ -30,9 +30,8 @@ val mealList = SchoolMeal.getMeal(schoolSearched, year, month)
 
 ## 개발 환경
 
-##### Kotlin: >= 1.4.31
-##### Java: >= 16
-##### JVM: 1.5.10
+##### Kotlin: >= 1.5
+##### Java: >= 1.8
 
 ## 도움이 된 라이브러리
 ##### [neis](https://github.com/nnnlog/neis): JavaScript & TypeScript 나이스 API

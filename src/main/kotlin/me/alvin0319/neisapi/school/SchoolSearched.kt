@@ -36,5 +36,5 @@ open class SchoolSearched(
     // 학교 이름
     val name: String,
     // 학교 소재지
-    var address: String
+    val address: String
 ) : School(edu, code, kind)

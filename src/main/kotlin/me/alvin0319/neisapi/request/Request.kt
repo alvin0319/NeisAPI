@@ -24,6 +24,8 @@
 package me.alvin0319.neisapi.request
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import me.alvin0319.neisapi.types.SchoolDistrictList
 import org.apache.http.HttpResponse
 import org.apache.http.client.methods.HttpPost
@@ -32,6 +34,8 @@ import org.apache.http.entity.StringEntity
 import org.apache.http.impl.client.HttpClients
 
 object Request {
+    var mapper: ObjectMapper = JsonMapper()
+        .registerKotlinModule()
 
     @JvmStatic
     fun createRequest(url: String, eduCode: SchoolDistrictList, body: Map<String, Any>): HttpResponse {
@@ -44,7 +48,7 @@ object Request {
         )
         request.addHeader("Cookie", "JSESSIONID=" + (EduSessionManager.getSession(eduCode)).cookie)
 
-        val entity = StringEntity(ObjectMapper().writeValueAsString(body), ContentType.APPLICATION_JSON)
+        val entity = StringEntity(mapper.writeValueAsString(body), ContentType.APPLICATION_JSON)
         request.entity = entity
 
         return client.execute(request)

@@ -25,79 +25,21 @@ package me.alvin0319.neisapi.util.search
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.annotation.JsonPropertyOrder
-import javax.annotation.Generated
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder(
-    "method",
-    "globCorpCd",
-    "resultMsg",
-    "dept",
-    "userId",
-    "ip",
-    "resultCode",
-    "commitYn",
-    "lang",
-    "useSession",
-    "voId",
-    "svcId",
-    "testExeSeq"
-)
-@Generated("jsonschema2pojo")
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Data constructor(
-    @get:JsonProperty("method")
-    @set:JsonProperty("method")
-    @JsonProperty("method")
-    var method: String? = null,
-    @get:JsonProperty("globCorpCd")
-    @set:JsonProperty("globCorpCd")
-    @JsonProperty("globCorpCd")
-    var globCorpCd: String? = null,
-    @get:JsonProperty("resultMsg")
-    @set:JsonProperty("resultMsg")
-    @JsonProperty("resultMsg")
-    var resultMsg: String? = null,
-    @get:JsonProperty("dept")
-    @set:JsonProperty("dept")
-    @JsonProperty("dept")
-    var dept: String? = null,
-    @get:JsonProperty("userId")
-    @set:JsonProperty("userId")
-    @JsonProperty("userId")
-    var userId: String? = null,
-    @get:JsonProperty("ip")
-    @set:JsonProperty("ip")
-    @JsonProperty("ip")
-    var ip: String? = null,
-    @get:JsonProperty("resultCode")
-    @set:JsonProperty("resultCode")
-    @JsonProperty("resultCode")
-    var resultCode: String? = null,
-    @get:JsonProperty("commitYn")
-    @set:JsonProperty("commitYn")
-    @JsonProperty("commitYn")
-    var commitYn: String? = null,
-    @get:JsonProperty("lang")
-    @set:JsonProperty("lang")
-    @JsonProperty("lang")
-    var lang: String? = null,
-    @get:JsonProperty("useSession")
-    @set:JsonProperty("useSession")
-    @JsonProperty("useSession")
-    var useSession: String? = null,
-    @get:JsonProperty("voId")
-    @set:JsonProperty("voId")
-    @JsonProperty("voId")
-    var voId: String? = null,
-    @get:JsonProperty("svcId")
-    @set:JsonProperty("svcId")
-    @JsonProperty("svcId")
-    var svcId: String? = null,
-    @get:JsonProperty("testExeSeq")
-    @set:JsonProperty("testExeSeq")
-    @JsonProperty("testExeSeq")
-    var testExeSeq: String? = null
+    val method: String?,
+    val globCorpCd: String?,
+    val resultMsg: String?,
+    val dept: String?,
+    val userId: String?,
+    val ip: String?,
+    val resultCode: String?,
+    val commitYn: String?,
+    val lang: String?,
+    val useSession: String?,
+    val voId: String?,
+    val svcId: String?,
+    val testExeSeq: String?
 )
