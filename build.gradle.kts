@@ -21,6 +21,11 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.12.4")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-properties:2.12.4")
     implementation("javax.annotation:javax.annotation-api:1.3.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 tasks.withType<KotlinCompile>() {
