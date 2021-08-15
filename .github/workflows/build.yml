@@ -7,13 +7,24 @@ jobs:
   build:
     name: Build artifact
     runs-on: ubuntu-latest
-    if: "!contains(github.event.commits[0].message, 'ci skip')"
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+    strategy:
+      matrix:
+        java: [ "16" ]
+
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{ matrix.java }}
+
       - name: Building artifact
         run: ./gradlew clean shadowJar
       - name: Upload build artifact
         uses: actions/upload-artifact@v2.2.2
         with:
           name: artifact
-          path: NeisAPI-1.0-SNAPSHOT.jar
+          path: build/libs/NeisAPI-*.jar
           retention-days: 90
