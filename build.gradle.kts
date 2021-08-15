@@ -8,6 +8,10 @@ plugins {
     id("maven-publish")
 }
 
+val groupName = "me.alvin0319.neisapi"
+val projectVersion = "1.0-SNAPSHOT"
+val projectName = "NeisAPI"
+
 group = "me.alvin0319.neisapi"
 version = "1.0-SNAPSHOT"
 
@@ -28,6 +32,16 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
 }
 tasks.named<ShadowJar>("shadowJar") {
-    archiveBaseName.set("NeisAPI")
+    archiveBaseName.set(projectName)
     mergeServiceFiles()
+}
+
+publishing {
+    publications {
+        named<MavenPublication>("mavenJava") {
+            groupId = groupName
+            artifactId = projectName
+            version = projectVersion
+        }
+    }
 }
