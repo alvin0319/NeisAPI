@@ -60,7 +60,7 @@ data class Meal @JvmOverloads constructor(
             date.year = year - 1900
             date.date = charSplited.removeFirst().toInt()
 
-            val mealString: String
+            var mealString: String
             val mealList: List<String> = listOf("[조식]", "[중식]", "[석식]")
 
             val meals: MutableMap<String, MutableList<String>> = mutableMapOf()
@@ -74,7 +74,7 @@ data class Meal @JvmOverloads constructor(
             } else {
                 return Meal(date)
             }
-            val currentString: String
+            var currentString: String
             while (charSplited.isNotEmpty()) {
                 currentString = charSplited.removeFirst()
                 if (mealList.contains(currentString)) {
