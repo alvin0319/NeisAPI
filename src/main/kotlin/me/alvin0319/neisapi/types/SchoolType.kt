@@ -30,6 +30,7 @@ enum class SchoolType(val id: Int) {
     HIGH(4);
 
     companion object {
+        @JvmStatic
         fun fromInt(from: String): SchoolType {
             return when (from.toInt()) {
                 1 -> KINDERGARTEN

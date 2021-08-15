@@ -25,5 +25,16 @@ package me.alvin0319.neisapi.types
 
 enum class SchoolFoundType {
     PUBLIC,
-    PRIVATE
+    PRIVATE;
+
+    companion object {
+        @JvmStatic
+        fun fromString(str: String): SchoolFoundType {
+            return when (str) {
+                "사립" -> PRIVATE
+                "공립" -> PUBLIC
+                else -> PUBLIC
+            }
+        }
+    }
 }

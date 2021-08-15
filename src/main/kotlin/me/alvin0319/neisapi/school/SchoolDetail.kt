@@ -23,13 +23,15 @@
  */
 package me.alvin0319.neisapi.school
 
+import me.alvin0319.neisapi.request.Request
+import me.alvin0319.neisapi.request.Request.mapper
 import me.alvin0319.neisapi.types.SchoolDistrictList
 import me.alvin0319.neisapi.types.SchoolFoundType
 import me.alvin0319.neisapi.types.SchoolGenderType
 import me.alvin0319.neisapi.types.SchoolType
+import me.alvin0319.neisapi.util.detail.SchoolDetailSearchResult
 import java.util.Date
 
-// TODO
 class SchoolDetail(
     edu: SchoolDistrictList,
     code: String,
@@ -44,4 +46,56 @@ class SchoolDetail(
     val genderType: SchoolGenderType,
     val foundType: SchoolFoundType,
     val teachers: Int
-) : SchoolSearched(edu, code, kind, name, address)
+) : SchoolSearched(edu, code, kind, name, address) {
+
+    companion object {
+        @JvmStatic
+        private val details: MutableMap<SchoolDistrictList, MutableMap<String, SchoolDetail>> = mutableMapOf()
+
+        @JvmOverloads
+        @JvmStatic
+        fun getSchoolDetail(school: School, refresh: Boolean = false): SchoolDetail? {
+            if (details.getOrPut(school.edu, ::mutableMapOf).containsKey(school.code) && !refresh) {
+                return details.getValue(school.edu).getValue(school.code)
+            }
+            val response = Request.createRequest(
+                "sts_sci_si00_001.ws", school.edu,
+                mapOf(
+                    "schulCode" to school.code,
+                    "schulCrseScCode" to school.kind.id.toString(),
+                    "schulKndScCode" to "0" + school.kind.id.toString()
+                )
+            )
+            val detailSearchResult = mapper.readValue(response.entity.content, SchoolDetailSearchResult::class.java)
+            val lists = detailSearchResult.resultSVO?.swcSciSi00M00List?.get(0) ?: return null
+
+            val schoolDetail = SchoolDetail(
+                school.edu,
+                school.code,
+                SchoolType.fromInt(detailSearchResult.resultSVO.schulCrseScCode ?: "0"),
+                lists.kraOrgNm ?: "",
+                lists.zipAdres ?: "",
+                parseYmdFromString(lists.fondYmd ?: ""),
+                lists.zipCode ?: "",
+                lists.orgTelno ?: "",
+                lists.orgFaxno ?: "",
+                lists.homepage ?: "",
+                SchoolGenderType.fromString(lists.coeduScNm ?: ""),
+                SchoolFoundType.fromString(lists.fondScNm ?: ""),
+                detailSearchResult.resultSVO.gyowonCnList?.get(0)?.tcnt?.toInt() ?: 0
+            )
+
+            details.getOrPut(school.edu, ::mutableMapOf)[school.code] = schoolDetail
+
+            return schoolDetail
+        }
+
+        private fun parseYmdFromString(str: String): Date {
+            if (str.isEmpty()) {
+                return Date()
+            }
+            val (year, month, day) = str.split(".")
+            return Date(year.toInt() - 1900, month.toInt(), day.toInt())
+        }
+    }
+}

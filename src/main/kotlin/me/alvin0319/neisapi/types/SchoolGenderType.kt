@@ -26,5 +26,16 @@ package me.alvin0319.neisapi.types
 enum class SchoolGenderType {
     COEDUCATION,
     MALE,
-    FEMALE
+    FEMALE;
+    companion object {
+        @JvmStatic
+        fun fromString(str: String): SchoolGenderType {
+            return when (str) {
+                "남" -> MALE
+                "여" -> FEMALE
+                "남녀공학" -> COEDUCATION
+                else -> COEDUCATION
+            }
+        }
+    }
 }
