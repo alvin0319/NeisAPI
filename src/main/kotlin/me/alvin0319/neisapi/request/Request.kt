@@ -46,7 +46,7 @@ object Request {
             "User-Agent",
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36"
         )
-        request.addHeader("Cookie", "JSESSIONID=" + (EduSessionManager.getSession(eduCode)).cookie)
+        request.addHeader("Cookie", "JSESSIONID=" + (EduSession.getSession(eduCode)).cookie)
 
         val entity = StringEntity(mapper.writeValueAsString(body), ContentType.APPLICATION_JSON)
         request.entity = entity
