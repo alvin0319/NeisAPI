@@ -23,7 +23,7 @@
  */
 package me.alvin0319.neisapi
 
-import me.alvin0319.neisapi.school.SchoolSearch
+import me.alvin0319.neisapi.school.SchoolSearched
 import me.alvin0319.neisapi.types.SchoolDistrictList
 
 fun main(args: Array<String>) {
@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
 
     val start = System.currentTimeMillis()
 
-    val result = SchoolSearch.search(schoolName, edu, true)
+    val result = SchoolSearched.search(schoolName, edu, true)
 
     val end = System.currentTimeMillis()
 

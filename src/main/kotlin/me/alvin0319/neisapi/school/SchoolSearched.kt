@@ -23,8 +23,11 @@
  */
 package me.alvin0319.neisapi.school
 
+import com.fasterxml.jackson.module.kotlin.readValue
+import me.alvin0319.neisapi.request.Request
 import me.alvin0319.neisapi.types.SchoolDistrictList
 import me.alvin0319.neisapi.types.SchoolType
+import me.alvin0319.neisapi.util.search.DataBody
 
 open class SchoolSearched(
     // 교육청
@@ -37,4 +40,68 @@ open class SchoolSearched(
     val name: String,
     // 학교 소재지
     val address: String
-) : School(edu, code, kind)
+) : School(edu, code, kind) {
+
+    companion object {
+        @JvmStatic
+        val result: MutableMap<SchoolDistrictList, MutableMap<String, MutableList<SchoolSearched>>> = mutableMapOf()
+
+        @JvmOverloads
+        @JvmStatic
+        fun search(name: String, edu: SchoolDistrictList, refresh: Boolean = false): List<SchoolSearched> {
+            if (result.getOrPut(edu) { mutableMapOf() }.containsKey(name) && !refresh) {
+                return result[edu]?.get(name)!!
+            }
+            return fetchData(name, edu)
+        }
+
+        private fun searchResults(name: String, code: SchoolDistrictList): MutableList<SchoolSearched> {
+            val response = Request.createRequest(
+                "spr_ccm_cm01_100.ws", code,
+                mapOf(
+                    "kraOrgNm" to name
+                )
+            )
+            if (response.statusLine.statusCode != 200) {
+                return mutableListOf()
+            }
+
+            val searchResult = Request.mapper.readValue<DataBody>(response.entity.content)
+            val searchedList: MutableList<SchoolSearched> = mutableListOf()
+
+            if (searchResult.result?.status != "success") {
+                return searchedList
+            }
+
+            searchResult.resultSVO?.orgDVOList?.forEach {
+                searchedList.add(
+                    SchoolSearched(
+                        code,
+                        it.orgCode ?: "",
+                        SchoolType.fromInt(it.schulCrseScCode?.uppercase() ?: "2"),
+                        it.kraOrgNm ?: "",
+                        it.zipAdres ?: "주소를 찾을 수 없습니다."
+                    )
+                )
+            }
+            return searchedList
+        }
+
+        private fun fetchData(name: String, edu: SchoolDistrictList): List<SchoolSearched> {
+            val complete: MutableList<SchoolSearched> = mutableListOf()
+            return if (edu == SchoolDistrictList.ALL) {
+                SchoolDistrictList.values().forEach {
+                    if (it != SchoolDistrictList.ALL) {
+                        searchResults(name, it).forEach { res ->
+                            complete.add(res)
+                        }
+                    }
+                }
+                complete
+            } else {
+                result.getOrPut(edu) { mutableMapOf() }[name] = searchResults(name, edu)
+                result[edu]?.get(name)!!
+            }
+        }
+    }
+}

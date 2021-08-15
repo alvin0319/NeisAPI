@@ -23,8 +23,8 @@
  */
 package me.alvin0319.neisapi
 
-import me.alvin0319.neisapi.school.SchoolMeal
-import me.alvin0319.neisapi.school.SchoolSearch
+import me.alvin0319.neisapi.school.SchoolSearched
+import me.alvin0319.neisapi.school.meal.Meal
 import me.alvin0319.neisapi.school.meal.MealType
 import me.alvin0319.neisapi.types.SchoolDistrictList
 
@@ -36,7 +36,7 @@ class MealTest {
 
         val start = System.currentTimeMillis()
 
-        val result = SchoolSearch.search(schoolName, edu, true)
+        val result = SchoolSearched.search(schoolName, edu, true)
 
         val end = System.currentTimeMillis()
 
@@ -52,7 +52,7 @@ class MealTest {
         val month = 4
 
         // 캐시 X 테스트
-        val meals = SchoolMeal.getMeal(school, year, month)
+        val meals = Meal.getMeal(school, year, month)
 
         meals.forEach { (_, meal) ->
             println("=== ${school.name} ${meal.date.year}년 ${meal.date.month}월 ${meal.date.date}일 급식 ===")
@@ -61,7 +61,7 @@ class MealTest {
             println("석식: ${meal.removeAllergy(MealType.DINNER)}")
         }
         // 캐시 테스트
-        SchoolMeal.getMeal(school, year, month).forEach { (_, meal) ->
+        Meal.getMeal(school, year, month).forEach { (_, meal) ->
             println("=== ${school.name} ${meal.date.year}년 ${meal.date.month}월 ${meal.date.date}일 급식 ===")
             println("조식: ${meal.removeAllergy(MealType.BREAKFAST)}")
             println("중식: ${meal.removeAllergy(MealType.LUNCH)}")
