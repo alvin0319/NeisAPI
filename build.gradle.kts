@@ -28,6 +28,6 @@ tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
 }
 tasks.named<ShadowJar>("shadowJar") {
-    archiveBaseName.set("shadow")
+    archiveBaseName.set("NeisAPI")
     mergeServiceFiles()
 }
