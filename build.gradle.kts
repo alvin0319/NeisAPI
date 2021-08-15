@@ -35,13 +35,3 @@ tasks.named<ShadowJar>("shadowJar") {
     archiveBaseName.set(projectName)
     mergeServiceFiles()
 }
-
-publishing {
-    publications {
-        named<MavenPublication>("mavenJava") {
-            groupId = groupName
-            artifactId = projectName
-            version = projectVersion
-        }
-    }
-}
