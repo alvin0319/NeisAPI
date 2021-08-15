@@ -10,7 +10,9 @@ group = "me.alvin0319.inventorytest"
 version = "1.0-SNAPSHOT"
 
 repositories {
+    jcenter()
     mavenCentral()
+    maven { url = uri("https://jitpack.io") }
 }
 dependencies {
     implementation("org.apache.commons:commons-lang3:3.12.0")
@@ -26,10 +28,4 @@ tasks.withType<KotlinCompile> {
 tasks.named<ShadowJar>("shadowJar") {
     archiveBaseName.set("shadow")
     mergeServiceFiles()
-}
-
-allprojects {
-    repositories {
-        maven { url = uri("https://jitpack.io") }
-    }
 }
