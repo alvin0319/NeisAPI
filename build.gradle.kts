@@ -27,3 +27,9 @@ tasks.named<ShadowJar>("shadowJar") {
     archiveBaseName.set("shadow")
     mergeServiceFiles()
 }
+
+allprojects {
+    repositories {
+        maven { url = uri("https://jitpack.io") }
+    }
+}
