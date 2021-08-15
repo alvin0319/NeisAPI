@@ -4,7 +4,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.5.21"
     id("com.github.johnrengelman.shadow") version "7.0.0"
-    kotlin("maven")
+    id("java")
+    id("maven-publish")
 }
 
 group = "me.alvin0319.neisapi"
@@ -29,8 +30,4 @@ tasks.withType<KotlinCompile> {
 tasks.named<ShadowJar>("shadowJar") {
     archiveBaseName.set("shadow")
     mergeServiceFiles()
-}
-
-tasks.named<ShadowJar>("install") {
-
 }
