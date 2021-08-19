@@ -74,8 +74,8 @@ data class Meal @JvmOverloads constructor(
         fun getMeal(school: School, year: Int, month: Int, refresh: Boolean = false): MutableMap<DateInt, Meal> {
             val edu = school.edu
             if (
-                !refresh && result.getOrPut(edu) { mutableMapOf() }.getOrPut(school.code) { mutableMapOf() }
-                    .getOrPut(year) { mutableMapOf() }.containsKey(month)
+                !refresh && result.getOrPut(edu, ::mutableMapOf).getOrPut(school.code, ::mutableMapOf)
+                    .getOrPut(year, ::mutableMapOf).containsKey(month)
             ) {
                 return result.getValue(edu).getValue(school.code).getValue(year).getValue(month)
             }
@@ -130,12 +130,12 @@ data class Meal @JvmOverloads constructor(
                         )
                         result.getOrPut(edu) {
                             mutableMapOf()
-                        }[school.code]!!.getOrPut(year) { mutableMapOf() }
-                            .getOrPut(month) { mutableMapOf() }[meal.date.date] = meal
+                        }.getValue(school.code).getOrPut(year, ::mutableMapOf)
+                            .getOrPut(month, ::mutableMapOf)[meal.date.date] = meal
                     }
                 }
 
-                return result[edu]!![school.code]!![year]!![month]!!
+                return result.getValue(edu).getValue(school.code).getValue(year).getValue(month)
             }
             throw AssertionError("Invalid data received")
         }
